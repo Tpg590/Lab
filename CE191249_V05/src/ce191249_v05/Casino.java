@@ -54,14 +54,10 @@ public class Casino {
                     case "1":
 
                         buyChip();
-                        System.out.println(player.getCash());
-                        System.out.println(player.getChip());
                         break;
                     case "2":
 
                         sellChips();
-                        System.out.println(player.getCash());
-                        System.out.println(player.getChip());
                         break;
                     case "3":
                         playCraps();
@@ -251,9 +247,8 @@ public class Casino {
         }
     }
 
-    
-    public void playArup(){
-          miniLoop = true;
+    public void playArup() {
+        miniLoop = true;
         if (player.getChip() < 1) {
             System.out.println("You have no chip to bet.");
         } else {
