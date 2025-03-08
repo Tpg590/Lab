@@ -54,6 +54,6 @@ public class Player {
     
     
     public String getQuit(){
-        return String.format("After selling your chips, you have $%d. Thanks for playing!", cash);
+        return String.format("After selling your chips, you have $%d. Thanks for playing!", cash + chip * 10);
     }
 }
