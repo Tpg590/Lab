@@ -11,8 +11,6 @@ package ce191249_v05;
  */
 public class Player {
     private int cash;
-    private int cost;
-    private int bet;
     private int chip;
 
     public int getCash() {
@@ -22,23 +20,7 @@ public class Player {
     public void setCash(int cash) {
         this.cash = cash;
     }
-
-    public int getCost() {
-        return cost = cash - 11 * chip;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public int getBet() {
-        return bet;
-    }
-
-    public void setBet(int bet) {
-        this.bet = bet;
-    }
-
+    
     public int getChip() {
         return chip;
     }
