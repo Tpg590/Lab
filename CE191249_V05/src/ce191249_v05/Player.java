@@ -12,7 +12,18 @@ package ce191249_v05;
 public class Player {
     private int cash;
     private int chip;
+    private int kidney;
 
+    public int getKidney() {
+        return kidney;
+    }
+
+    public void setKidney(int kidney) {
+        this.kidney = kidney;
+    }
+
+    
+    
     public int getCash() {
         return cash;
     }

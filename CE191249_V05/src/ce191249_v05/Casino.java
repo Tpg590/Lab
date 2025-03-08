@@ -16,6 +16,9 @@ public class Casino {
 
     private String choice;
     private String number;
+    private int body;
+    private static final int earn = 1000;
+    private int allIn;
     private int k;
     private int cost;
     private int cash;
@@ -40,6 +43,7 @@ public class Casino {
     }
 
     public void choiceAction() {
+        player.setKidney(2);
         cash = 1000;
         player.setCash(cash);
         loop = true;
@@ -62,12 +66,17 @@ public class Casino {
                 case "2":
 
                     selectTypeSell();
+                    loop = true;
                     break;
                 case "3":
-                    playCraps();
+                    selectAllInCrap();
+                    loop = true;
+                    checkMoney();
                     break;
                 case "4":
-                    playArup();
+                    selectAllInArup();
+                    loop = true;
+                    checkMoney();
                     break;
                 case "5":
                     System.out.println(player.getReport());
@@ -109,35 +118,35 @@ public class Casino {
             return;
         }
         while (loop) {
-            {
-                System.out.println("-----Menu Buy-----");
-                System.out.println("1) Buy by each");
-                System.out.println("2) Buy All");
-                System.out.println("3) Quit");
-                choice = sc.nextLine().trim();
 
-                if (choice.isEmpty()) {
-                    System.out.println("Choice can't be empty. please Enter again.");
-                    continue;
-                } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
-                    continue;
-                }
+            System.out.println("-----Menu Buy-----");
+            System.out.println("1) Buy each number");
+            System.out.println("2) Buy All");
+            System.out.println("3) Quit");
+            choice = sc.nextLine().trim();
 
-                switch (choice) {
-                    case "1":
+            if (choice.isEmpty()) {
+                System.out.println("Choice can't be empty. please Enter again.");
+                continue;
+            } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
+                continue;
+            }
 
-                        buyChip();
-                        return;
+            switch (choice) {
+                case "1":
 
-                    case "2":
+                    buyChip();
+                    return;
 
-                        buyAllChip();
-                        return;
-                    case "3":
-                        System.out.println("Out of the purchase hall completed.");
-                        loop = false;
-                        break;
-                }
+                case "2":
+
+                    buyAllChip();
+                    return;
+                case "3":
+                    System.out.println("Out of the purchase hall completed.");
+                    loop = false;
+                    break;
+
             }
         }
     }
@@ -199,55 +208,55 @@ public class Casino {
         }
     }
 
-    public void selectTypeSell(){
-            if (player.getChip() < 1) {
+    public void selectTypeSell() {
+        if (player.getChip() < 1) {
             System.out.println("You have no chip to sell.");
             return;
         }
-            
-              while (loop) {
-            {
-                System.out.println("-----Menu Buy-----");
-                System.out.println("1) Sold by each");
-                System.out.println("2) Sold All");
-                System.out.println("3) Quit");
-                choice = sc.nextLine().trim();
 
-                if (choice.isEmpty()) {
-                    System.out.println("Choice can't be empty. please Enter again.");
-                    continue;
-                } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
-                    continue;
-                }
+        while (loop) {
 
-                switch (choice) {
-                    case "1":
+            System.out.println("-----Menu Buy-----");
+            System.out.println("1) Sell each number");
+            System.out.println("2) Sold All");
+            System.out.println("3) Quit");
+            choice = sc.nextLine().trim();
 
-                        sellChips();
-                        return;
+            if (choice.isEmpty()) {
+                System.out.println("Choice can't be empty. please Enter again.");
+                continue;
+            } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
+                continue;
+            }
 
-                    case "2":
+            switch (choice) {
+                case "1":
 
-                       sellAllChips();
-                        return;
-                    case "3":
-                        System.out.println("Out of the sold hall completed.");
-                        loop = false;
-                        break;
-                }
+                    sellChips();
+                    return;
+
+                case "2":
+
+                    sellAllChips();
+                    return;
+                case "3":
+                    System.out.println("Out of the sold hall completed.");
+                    loop = false;
+                    break;
+
             }
         }
     }
-    
-    public void sellAllChips(){
+
+    public void sellAllChips() {
         System.out.println("-----------------------------------");
-         cash += player.getChip() * 10;
-            chip = chip - player.getChip();
-            player.setChip(chip);
-            player.setCash(cash);
-            System.out.printf("After selling all your chips, you have $%d\n", player.getCash());
+        cash += player.getChip() * 10;
+        chip = chip - player.getChip();
+        player.setChip(chip);
+        player.setCash(cash);
+        System.out.printf("After selling all your chips, you have $%d\n", player.getCash());
     }
-    
+
     public void sellChips() {
         System.out.println("-----------------------------------");
         miniLoop = true;
@@ -294,13 +303,49 @@ public class Casino {
         }
     }
 
-    public void playCraps() {
-        System.out.println("-----------------------------------");
-        miniLoop = true;
+    public void selectAllInCrap() {
         if (player.getChip() < 1) {
             System.out.println("You have no chip to bet.");
             return;
         }
+
+        while (loop) {
+
+            System.out.println("-----Play Craps-----");
+            System.out.println("1) Bet each number");
+            System.out.println("2) All In");
+            System.out.println("3) Quit");
+            choice = sc.nextLine().trim();
+
+            if (choice.isEmpty()) {
+                System.out.println("Choice can't be empty. please Enter again.");
+                continue;
+            } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
+                continue;
+            }
+
+            switch (choice) {
+                case "1":
+
+                    playCraps();
+                    return;
+
+                case "2":
+
+                    allInCrap();
+                    return;
+                case "3":
+                    System.out.println("See you soon.");
+                    loop = false;
+                    break;
+
+            }
+        }
+    }
+
+    public void playCraps() {
+        System.out.println("-----------------------------------");
+        miniLoop = true;
 
         while (miniLoop) {
             System.out.println("How many chips would you like to bet?");
@@ -430,14 +475,144 @@ public class Casino {
         }
     }
 
-    public void playArup() {
-        System.out.println("-----------------------------------");
-        miniLoop = true;
+    public void selectAllInArup() {
         if (player.getChip() < 1) {
             System.out.println("You have no chip to bet.");
             return;
         }
 
+        while (loop) {
+
+            System.out.println("-----Play Arup's Game of Dice-----");
+            System.out.println("1) Bet each number");
+            System.out.println("2) All In");
+            System.out.println("3) Quit");
+            choice = sc.nextLine().trim();
+
+            if (choice.isEmpty()) {
+                System.out.println("Choice can't be empty. please Enter again.");
+                continue;
+            } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
+                continue;
+            }
+
+            switch (choice) {
+                case "1":
+
+                    playArup();
+                    return;
+
+                case "2":
+
+                    playAllInArup();
+                    return;
+                case "3":
+                    System.out.println("See you soon.");
+                    loop = false;
+                    break;
+
+            }
+        }
+    }
+
+    public void playAllInArup() {
+        miniLoop = true;
+        allIn = player.getChip();
+        chip -= player.getChip();
+        player.setChip(chip);
+        while (miniLoop) {
+            System.out.println("Press 'r' and hit enter for your first roll.");
+            choice = sc.nextLine().trim().toLowerCase();
+            if (choice.isEmpty()) {
+                System.out.println("Sorry, can't be empty.");
+                continue;
+            }
+
+            if (checkInput(choice, "Sorry, can't be enter special character", "[0-9a-zA-Z ]+")) {
+                continue;
+            }
+            if (checkInput(choice, "Sorry, can't be enter number", "[a-zA-Z ]+")) {
+                continue;
+            }
+
+            if (checkInput(choice, "Sorry, can't be enter space", "[a-zA-Z]+")) {
+                continue;
+            }
+
+            if (checkInput(choice, "Please enter r", "[r]")) {
+                continue;
+            }
+            int randNumber1 = rand.nextInt(6) + 1;
+
+            int randNumber2 = rand.nextInt(6) + 1;
+
+            int randNumber = randNumber1 + randNumber2;
+
+            System.out.println(randNumber);
+            if (randNumber == 12 || randNumber == 11) {
+                System.out.println("You win!");
+                chip += allIn * 2;
+                player.setChip(chip);
+                miniLoop = false;
+                continue;
+            }
+            if (randNumber == 2) {
+                System.out.println("Sorry, you have lost.");
+                miniLoop = false;
+                continue;
+            }
+            k = randNumber;
+            while (miniLoop) {
+                System.out.println("Press 'r' and hit enter for your first roll.");
+                choice = sc.nextLine().trim().toLowerCase();
+                if (choice.isEmpty()) {
+                    System.out.println("Sorry, can't be empty.");
+                    continue;
+                }
+
+                if (checkInput(choice, "Sorry, can't be enter special character", "[0-9a-zA-Z ]+")) {
+                    continue;
+                }
+                if (checkInput(choice, "Sorry, can't be enter number", "[a-zA-Z ]+")) {
+                    continue;
+                }
+
+                if (checkInput(choice, "Sorry, can't be enter space", "[a-zA-Z]+")) {
+                    continue;
+                }
+
+                if (checkInput(choice, "Please enter r", "[r]")) {
+                    continue;
+                }
+
+                randNumber1 = rand.nextInt(6) + 1;
+
+                randNumber2 = rand.nextInt(6) + 1;
+
+                randNumber = randNumber1 + randNumber2;
+                System.out.println(randNumber);
+                if (randNumber > k) {
+                    System.out.println("You win!");
+                    chip += allIn * 2;
+                    player.setChip(chip);
+                    miniLoop = false;
+                    continue;
+                }
+                if (randNumber <= k) {
+                    System.out.println("Sorry, you have lost.");
+                    miniLoop = false;
+                    continue;
+
+                }
+
+            }
+        }
+
+    }
+
+    public void playArup() {
+        System.out.println("-----------------------------------");
+        miniLoop = true;
         while (miniLoop) {
             System.out.println("How many chips would you like to bet?");
             number = sc.nextLine().trim();
@@ -565,6 +740,150 @@ public class Casino {
                 }
             }
 
+        }
+    }
+
+    public void allInCrap() {
+        miniLoop = true;
+        System.out.println("-----------------------------------");
+            allIn = player.getChip();
+            chip -= player.getChip();
+            player.setChip(chip);
+            while (miniLoop) {
+                System.out.println("Press 'r' and hit enter for your first roll.");
+                choice = sc.nextLine().trim().toLowerCase();
+                if (choice.isEmpty()) {
+                    System.out.println("Sorry, can't be empty.");
+                    continue;
+                }
+
+                if (checkInput(choice, "Sorry, can't be enter special character", "[0-9a-zA-Z ]+")) {
+                    continue;
+                }
+                if (checkInput(choice, "Sorry, can't be enter number", "[a-zA-Z ]+")) {
+                    continue;
+                }
+
+                if (checkInput(choice, "Sorry, can't be enter space", "[a-zA-Z]+")) {
+                    continue;
+                }
+
+                if (checkInput(choice, "Please enter r", "[r]")) {
+                    continue;
+                }
+                int randNumber1 = rand.nextInt(6) + 1;
+
+                int randNumber2 = rand.nextInt(6) + 1;
+
+                int randNumber = randNumber1 + randNumber2;
+
+                System.out.println(randNumber);
+                if (randNumber == 7 || randNumber == 11) {
+                    System.out.println("You win!");
+                    chip += allIn * 2;
+                    player.setChip(chip);
+                    miniLoop = false;
+                    continue;
+                }
+                if (randNumber == 2 || randNumber == 3 || randNumber == 12) {
+                    System.out.println("Sorry, you have lost.");
+                    miniLoop = false;
+                    continue;
+                }
+                k = randNumber;
+                while (miniLoop) {
+                    System.out.println("Press 'r' and hit enter for your first roll.");
+                    choice = sc.nextLine().trim().toLowerCase();
+                    if (choice.isEmpty()) {
+                        System.out.println("Sorry, can't be empty.");
+                        continue;
+                    }
+
+                    if (checkInput(choice, "Sorry, can't be enter special character", "[0-9a-zA-Z ]+")) {
+                        continue;
+                    }
+                    if (checkInput(choice, "Sorry, can't be enter number", "[a-zA-Z ]+")) {
+                        continue;
+                    }
+
+                    if (checkInput(choice, "Sorry, can't be enter space", "[a-zA-Z]+")) {
+                        continue;
+                    }
+
+                    if (checkInput(choice, "Please enter r", "[r]")) {
+                        continue;
+                    }
+
+                    randNumber1 = rand.nextInt(6) + 1;
+
+                    randNumber2 = rand.nextInt(6) + 1;
+
+                    randNumber = randNumber1 + randNumber2;
+                    System.out.println(randNumber);
+                    if (randNumber == k) {
+                        System.out.println("You win!");
+                        chip += allIn * 2;
+                        player.setChip(chip);
+                        miniLoop = false;
+                        continue;
+                    }
+                    if (randNumber == 7) {
+                        System.out.println("Sorry, you have lost.");
+                        miniLoop = false;
+                        continue;
+
+                    }
+                }
+
+            }
+        }
+
+    public void soldKidney() {
+        body = player.getKidney() - 1;
+        player.setKidney(body);
+        cash = player.getCash() + earn;
+        player.setCash(cash);
+
+        System.out.printf("You have beenn sold your kidney. Cash +$%d", earn);
+    }
+
+    public void checkMoney() {
+        loop = true;
+        if (player.getCash() < 11 && player.getChip() < 1) {
+            if (player.getKidney() < 2) {
+                System.out.println("You have run out of money.");
+                System.out.println("See you again.");
+                loop = false;
+                return;
+            }
+
+            while (loop) {
+
+                System.out.println("You have run out of money.");
+                System.out.println("Now you have 2 choice:");
+                System.out.println("1) Exit.");
+                System.out.println("2) Sell ​​kidney to continue playing...");
+                choice = sc.nextLine().trim();
+
+                if (choice.isEmpty()) {
+                    System.out.println("Choice can't be empty. please Enter again.");
+                    continue;
+                } else if (checkInput(choice, "Choice can be only enter by number 1-3.", "[1-3]")) {
+                    continue;
+                }
+
+                switch (choice) {
+                    case "1":
+
+                        System.out.println("See you again.");
+                        loop = false;
+                        break;
+                    case "2":
+
+                        soldKidney();
+                        return;
+                }
+            }
         }
     }
 }
